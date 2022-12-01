@@ -1,7 +1,6 @@
 package model;
 
 import java.io.FileInputStream;
-import java.net.URL;
 import java.io.FileNotFoundException;
 
 import javafx.event.EventHandler;
@@ -13,8 +12,8 @@ import javafx.scene.text.Font;
 
 public class CrashDodgerButton extends Button {
 	private final String FONT_PATH = "src/model/resources/kenvector_future.ttf";
-	private static final String BUTTON_PRESSED_STYLE = "-fx-background-color: transparent;-fx-background-image: url('model/resources/yellow_button_pressed.png');";
-	private static final String BUTTON_FREE_STYLE = "-fx-background-color: transparent;-fx-background-image: url('model/resources/yellow_button.png');";
+	private final String BUTTON_PRESSED_STYLE = "-fx-background-color: transparent;-fx-background-image: url('/model/resources/yellow_button_pressed.png');";
+	private final String BUTTON_FREE_STYLE = "-fx-background-color: transparent;-fx-background-image: url('/model/resources/yellow_button.png');";
 
 	public CrashDodgerButton(String text) {
 		setText(text);
