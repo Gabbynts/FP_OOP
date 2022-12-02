@@ -43,7 +43,7 @@ public class ViewManager {
 	}
 	
 	private void createBackground() {
-		Image backgroundImage = new Image("view/resources/purple.png", 256, 256, false, true);
+		Image backgroundImage = new Image(getClass().getResourceAsStream("resources/purple.png"));
 		BackgroundImage background = new BackgroundImage(backgroundImage, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, null);
 		mainPane.setBackground(new Background(background));
 	}
