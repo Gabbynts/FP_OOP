@@ -7,7 +7,10 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
@@ -57,6 +60,7 @@ public class ViewManager {
 		createHelpButton();
 		createCreditsButton();
 		createExitButton();
+		createLogo();
 	}
 	
 	private void createStartButton() {
@@ -85,8 +89,35 @@ public class ViewManager {
 	}
 	
 	private void createBackground() {
-		Image backgroundImage = new Image(getClass().getResourceAsStream("resources/purple.jpg"));
+		Image backgroundImage = new Image("view/resources/purple.png", 256, 256, false, true);
+		//Image backgroundImage = new Image(getClass().getResourceAsStream("resources/purple.jpg"));
 		BackgroundImage background = new BackgroundImage(backgroundImage, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, null);
 		mainPane.setBackground(new Background(background));
+	}
+	
+	private void createLogo() {
+		ImageView logo = new ImageView("view/resources/crash_dodger.png");
+		logo.setLayoutX(400);
+		logo.setLayoutY(50);
+		
+		logo.setOnMouseEntered(new EventHandler<MouseEvent>() {
+			
+			@Override
+			public void handle(MouseEvent event) {
+				logo.setEffect(new DropShadow());
+			}
+			
+		});
+		
+		logo.setOnMouseExited(new EventHandler<MouseEvent>() {
+			
+			@Override
+			public void handle(MouseEvent event) {
+				logo.setEffect(null);
+			}
+			
+		});
+		
+		mainPane.getChildren().add(logo);
 	}
 }
