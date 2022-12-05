@@ -16,6 +16,8 @@ public class CrashDodgerSubScene extends SubScene {
 	private final static String FONT_PATH = "src/model/resources/konvector_future.ttf";
 	private final static String BACKGROUND_IMAGE = "model/resources/information.png";
 	
+	private boolean isHidden;
+	
 
 	public CrashDodgerSubScene() {
 		super(new AnchorPane(), 700, 700);
@@ -29,6 +31,8 @@ public class CrashDodgerSubScene extends SubScene {
 		
 		root2.setBackground(new Background(image));
 		
+		isHidden = true;
+		
 		setLayoutX(1024);
 		setLayoutY(180);
 	}
@@ -38,7 +42,14 @@ public class CrashDodgerSubScene extends SubScene {
 		transition.setDuration(Duration.seconds(0.3));
 		transition.setNode(this);
 		
-		transition.setToX(-676);
+		if(isHidden) {
+			transition.setToX(-676);
+			isHidden = false;
+		}
+		else {
+			transition.setToX(0);
+			isHidden = true;
+		}
 		
 		transition.play();
 	}

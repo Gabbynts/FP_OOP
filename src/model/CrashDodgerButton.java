@@ -12,7 +12,7 @@ import javafx.scene.text.Font;
 
 public class CrashDodgerButton extends Button {
 	private final String FONT_PATH = "src/model/resources/kenvector_future.ttf";
-	private final String BUTTON_PRESSED_STYLE = "-fx-background-color: transparent;-fx-background-image: url('/model/resources/yellow_button_pressed.png');";
+	private final String BUTTON_PRESSED_STYLE = "-fx-background-color: transparent;-fx-background-image: url('/model/resources/ypurple_button_pressed.png');";
 	private final String BUTTON_FREE_STYLE = "-fx-background-color: transparent;-fx-background-image: url('/model/resources/yellow_button.png');";
 
 	public CrashDodgerButton(String text) {

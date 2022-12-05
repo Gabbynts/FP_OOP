@@ -34,6 +34,11 @@ public class ViewManager {
 	private final static int MENU_BUTTONS_START_Y = 150;
 	
 	private CrashDodgerSubScene credistsSubScene;
+	private CrashDodgerSubScene helpSubScene;
+	private CrashDodgerSubScene scoreSubScene;
+	private CrashDodgerSubScene carChooserScene;
+	
+	private CrashDodgerSubScene sceneToHide;
 	
 	List<CrashDodgerButton> menuButtons;
 	
@@ -50,9 +55,27 @@ public class ViewManager {
 		createLogo();
 	}
 	
+	private void showSubScene(CrashDodgerSubScene subScene) {
+		if(sceneToHide != null) {
+			sceneToHide.moveSubScene();
+		}
+		
+		subScene.moveSubScene();
+		sceneToHide = subScene;
+	}
+	
 	private void createSubScenes() {
 		credistsSubScene = new CrashDodgerSubScene();
 		mainPane.getChildren().add(credistsSubScene);
+		
+		helpSubScene = new CrashDodgerSubScene();
+		mainPane.getChildren().add(helpSubScene);
+		
+		scoreSubScene = new CrashDodgerSubScene();
+		mainPane.getChildren().add(scoreSubScene);
+		
+		carChooserScene = new CrashDodgerSubScene();
+		mainPane.getChildren().add(carChooserScene);
 	}
 	
 	public Stage getMainStage() {
@@ -77,16 +100,43 @@ public class ViewManager {
 	private void createStartButton() {
 		CrashDodgerButton startButton = new CrashDodgerButton("PLAY");
 		addMenuButton(startButton);
+		
+		startButton.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				showSubScene(carChooserScene);
+				//carChooserScene.moveSubScene();
+			}
+			
+		});
 	}
 	
 	private void createScoresButton() {
 		CrashDodgerButton scoresButton = new CrashDodgerButton("SCORES");
 		addMenuButton(scoresButton);
+		
+		scoresButton.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				showSubScene(scoreSubScene);
+			}
+			
+		});
 	}
 	
 	private void createHelpButton() {
 		CrashDodgerButton helpButton = new CrashDodgerButton("HELP");
 		addMenuButton(helpButton);
+		
+		helpButton.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent event) {
+				showSubScene(helpSubScene);
+			}
+		});
 	}
 	
 	private void createCredistsButton() {
@@ -97,7 +147,7 @@ public class ViewManager {
 			
 			@Override
 			public void handle(ActionEvent event) {
-				credistsSubScene.moveSubScene();
+				showSubScene(credistsSubScene);
 			}
 		});
 	}
@@ -105,6 +155,15 @@ public class ViewManager {
 	private void createExitButton() {
 		CrashDodgerButton exitButton = new CrashDodgerButton("EXIT");
 		addMenuButton(exitButton);
+		
+		exitButton.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				mainStage.close();
+			}
+			
+		});
 	}
 	
 	private void createBackground() {
