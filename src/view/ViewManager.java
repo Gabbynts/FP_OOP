@@ -19,6 +19,7 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.stage.Stage;
 import model.CrashDodgerButton;
+import model.CrashDodgerSubScene;
 
 public class ViewManager {
 	
@@ -61,6 +62,12 @@ public class ViewManager {
 		createCreditsButton();
 		createExitButton();
 		createLogo();
+		
+		CrashDodgerSubScene subScene = new CrashDodgerSubScene();
+		
+		subScene.setLayoutX(200);
+		subScene.setLayoutY(100);
+		mainPane.getChildren().add(subScene);
 	}
 	
 	private void createStartButton() {
@@ -98,7 +105,7 @@ public class ViewManager {
 	private void createLogo() {
 		ImageView logo = new ImageView("view/resources/crash_dodger.png");
 		logo.setLayoutX(400);
-		logo.setLayoutY(50);
+		logo.setLayoutY(-110);
 		
 		logo.setOnMouseEntered(new EventHandler<MouseEvent>() {
 			
