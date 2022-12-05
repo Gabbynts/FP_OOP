@@ -3,6 +3,7 @@ package view;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -32,6 +33,8 @@ public class ViewManager {
 	private final static int MENU_BUTTONS_START_X = 100;
 	private final static int MENU_BUTTONS_START_Y = 150;
 	
+	private CrashDodgerSubScene credistsSubScene;
+	
 	List<CrashDodgerButton> menuButtons;
 	
 	public ViewManager() {
@@ -40,8 +43,16 @@ public class ViewManager {
 		mainScene = new Scene(mainPane, WIDTH, HEIGHT);
 		mainStage = new Stage();
 		mainStage.setScene(mainScene);
+		
+		createSubScenes();
 		createButtons();
 		createBackground();
+		createLogo();
+	}
+	
+	private void createSubScenes() {
+		credistsSubScene = new CrashDodgerSubScene();
+		mainPane.getChildren().add(credistsSubScene);
 	}
 	
 	public Stage getMainStage() {
@@ -59,15 +70,8 @@ public class ViewManager {
 		createStartButton();
 		createScoresButton();
 		createHelpButton();
-		createCreditsButton();
+		createCredistsButton();
 		createExitButton();
-		createLogo();
-		
-		CrashDodgerSubScene subScene = new CrashDodgerSubScene();
-		
-		subScene.setLayoutX(200);
-		subScene.setLayoutY(100);
-		mainPane.getChildren().add(subScene);
 	}
 	
 	private void createStartButton() {
@@ -85,9 +89,17 @@ public class ViewManager {
 		addMenuButton(helpButton);
 	}
 	
-	private void createCreditsButton() {
+	private void createCredistsButton() {
 		CrashDodgerButton creditsButton = new CrashDodgerButton("CREDITS");
 		addMenuButton(creditsButton);
+		
+		creditsButton.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent event) {
+				credistsSubScene.moveSubScene();
+			}
+		});
 	}
 	
 	private void createExitButton() {
@@ -98,7 +110,7 @@ public class ViewManager {
 	private void createBackground() {
 		Image backgroundImage = new Image("view/resources/purple.png", 256, 256, false, true);
 		//Image backgroundImage = new Image(getClass().getResourceAsStream("resources/purple.jpg"));
-		BackgroundImage background = new BackgroundImage(backgroundImage, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, null);
+		BackgroundImage background = new BackgroundImage(backgroundImage, BackgroundRepeat.REPEAT , BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, null);
 		mainPane.setBackground(new Background(background));
 	}
 	
