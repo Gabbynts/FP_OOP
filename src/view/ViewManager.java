@@ -91,8 +91,8 @@ public class ViewManager {
 		mainPane.getChildren().add(carChooserScene);
 		
 		InfoLabel chooseCarLabel = new InfoLabel("CHOOSE YOUR CAR");
-		chooseCarLabel.setLayoutX(110);
-		chooseCarLabel.setLayoutY(25);
+		chooseCarLabel.setLayoutX(130);
+		chooseCarLabel.setLayoutY(210);
 		carChooserScene.getPane().getChildren().add(chooseCarLabel);
 		carChooserScene.getPane().getChildren().add(createCarsToChoose());
 		carChooserScene.getPane().getChildren().add(createButtonToStart());
@@ -118,15 +118,15 @@ public class ViewManager {
 				}
 			});
 		}
-		box.setLayoutX(300 - (118*2));
-		box.setLayoutY(200);
+		box.setLayoutX(300 - (75*2));
+		box.setLayoutY(290);
 		return box;
 	}
 	
 	private CrashDodgerButton createButtonToStart() {
 		CrashDodgerButton startButton = new CrashDodgerButton("START");
 		startButton.setLayoutX(340);
-		startButton.setLayoutY(458);
+		startButton.setLayoutY(488);
 		return startButton;
 	}
 
@@ -219,7 +219,7 @@ public class ViewManager {
 	}
 	
 	private void createBackground() {
-		Image backgroundImage = new Image("view/resources/purple.png", 256, 256, false, true);
+		Image backgroundImage = new Image("view/resources/bg_1.png", 1100, 780, false, true);
 		//Image backgroundImage = new Image(getClass().getResourceAsStream("resources/purple.jpg"));
 		BackgroundImage background = new BackgroundImage(backgroundImage, BackgroundRepeat.REPEAT , BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, null);
 		mainPane.setBackground(new Background(background));
