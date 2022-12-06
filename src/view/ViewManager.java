@@ -51,6 +51,7 @@ public class ViewManager {
 	
 	
 	public ViewManager() {
+		//Constructor
 		menuButtons = new ArrayList<>();
 		mainPane = new AnchorPane();
 		mainScene = new Scene(mainPane, WIDTH, HEIGHT);
