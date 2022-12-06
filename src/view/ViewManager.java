@@ -18,9 +18,13 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import model.CAR;
+import model.CarPicker;
 import model.CrashDodgerButton;
 import model.CrashDodgerSubScene;
+import model.InfoLabel;
 
 public class ViewManager {
 	
@@ -41,6 +45,10 @@ public class ViewManager {
 	private CrashDodgerSubScene sceneToHide;
 	
 	List<CrashDodgerButton> menuButtons;
+	
+	List<CarPicker> carsList;
+	private CAR choosenCar;
+	
 	
 	public ViewManager() {
 		menuButtons = new ArrayList<>();
@@ -65,6 +73,7 @@ public class ViewManager {
 	}
 	
 	private void createSubScenes() {
+		
 		credistsSubScene = new CrashDodgerSubScene();
 		mainPane.getChildren().add(credistsSubScene);
 		
@@ -74,10 +83,53 @@ public class ViewManager {
 		scoreSubScene = new CrashDodgerSubScene();
 		mainPane.getChildren().add(scoreSubScene);
 		
-		carChooserScene = new CrashDodgerSubScene();
-		mainPane.getChildren().add(carChooserScene);
+		createCarChooserSubScene();
 	}
 	
+	private void createCarChooserSubScene() {
+		carChooserScene = new CrashDodgerSubScene();
+		mainPane.getChildren().add(carChooserScene);
+		
+		InfoLabel chooseCarLabel = new InfoLabel("CHOOSE YOUR CAR");
+		chooseCarLabel.setLayoutX(110);
+		chooseCarLabel.setLayoutY(25);
+		carChooserScene.getPane().getChildren().add(chooseCarLabel);
+		carChooserScene.getPane().getChildren().add(createCarsToChoose());
+		carChooserScene.getPane().getChildren().add(createButtonToStart());
+	}
+	
+	private HBox createCarsToChoose() {
+		HBox box = new HBox();
+		box.setSpacing(20);
+		carsList = new ArrayList<>();
+		for(CAR car : CAR.values()) {
+			CarPicker carToPick = new CarPicker(car);
+			carsList.add(carToPick);
+			box.getChildren().add(carToPick);
+			carToPick.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+				@Override
+				public void handle(MouseEvent event) {
+					for(CarPicker car : carsList) {
+						car.setIsCircleChoosen(false);
+					}
+					carToPick.setIsCircleChoosen(true);
+					choosenCar = carToPick.getCar();
+				}
+			});
+		}
+		box.setLayoutX(300 - (118*2));
+		box.setLayoutY(200);
+		return box;
+	}
+	
+	private CrashDodgerButton createButtonToStart() {
+		CrashDodgerButton startButton = new CrashDodgerButton("START");
+		startButton.setLayoutX(340);
+		startButton.setLayoutY(458);
+		return startButton;
+	}
+
 	public Stage getMainStage() {
 		return mainStage;
 	}
