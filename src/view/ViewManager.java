@@ -128,6 +128,19 @@ public class ViewManager {
 		CrashDodgerButton startButton = new CrashDodgerButton("START");
 		startButton.setLayoutX(340);
 		startButton.setLayoutY(488);
+		
+		startButton.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent arg0) {
+				if(choosenCar != null) {
+					GameViewManager gameViewManager = new GameViewManager();
+					gameViewManager.createNewGame(mainStage, choosenCar);
+				}
+			}
+			
+		});
+		
 		return startButton;
 	}
 
