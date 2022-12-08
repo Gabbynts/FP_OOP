@@ -38,10 +38,10 @@ public class GameViewManager {
 			@Override
 			public void handle(KeyEvent event) {
 				if(event.getCode() == KeyCode.LEFT) {
-					isLeftKeyPressed = false;
+					isLeftKeyPressed = true;
 				}
 				else if(event.getCode() == KeyCode.RIGHT){
-					isRightKeyPressed = false;
+					isRightKeyPressed = true;
 				}
 			}
 			
@@ -52,10 +52,10 @@ public class GameViewManager {
 			@Override
 			public void handle(KeyEvent event) {
 				if(event.getCode() == KeyCode.LEFT) {
-					
+					isLeftKeyPressed = false;
 				}
 				else if(event.getCode() == KeyCode.RIGHT) {
-					
+					isRightKeyPressed = false;
 				}
 			}
 			
@@ -110,7 +110,7 @@ public class GameViewManager {
 		}
 		
 		if(isRightKeyPressed && !isLeftKeyPressed) {
-			if(angle > 30) {
+			if(angle < 30) {
 				angle += 5;
 			}
 			car.setRotate(angle);
