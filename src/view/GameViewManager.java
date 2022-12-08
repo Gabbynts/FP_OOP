@@ -1,5 +1,7 @@
 package view;
 
+import java.util.Random;
+
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -31,6 +33,13 @@ public class GameViewManager {
 	private GridPane gridPane1;
 	private GridPane gridPane2;
 	private final static String BACKGROUND_IMAGE = "view/resources/purple.png";
+	
+	private final static String METEOR_BROWN_IMAGE = "view/resources/meteorBrown.png";
+	private final static String METEOR_IMAGE = "view/resources/meteorBrown.png";
+	
+	private ImageView[] brownMeteors;
+	private ImageView[] greyMeteors;
+	Random randomPositionGenerator;
 	
 	public GameViewManager() {
 		initializeStage();
@@ -80,8 +89,56 @@ public class GameViewManager {
 		this.menuStage.hide();
 		createBackground();
 		createCar(choosenCar);
+		createGameElements();
 		createGameLoop();
 		gameStage.show();
+	}
+	
+	private void createGameElements() {
+		brownMeteors = new ImageView[3];
+		for(int i = 0 ; i < brownMeteors.length ; i++) {
+			brownMeteors[i] = new ImageView(METEOR_BROWN_IMAGE);
+			setNewElementPosition(brownMeteors[i]);
+			gamePane.getChildren().add(brownMeteors[i]);
+		}
+		
+		greyMeteors = new ImageView[3];
+		for(int i = 0 ; i < greyMeteors.length ; i++) {
+			greyMeteors[i] = new ImageView(METEOR_IMAGE);
+			setNewElementPosition(greyMeteors[i]);
+			gamePane.getChildren().add(greyMeteors[i]);
+		}
+	}
+	
+	private void moveGameElements() {
+		for(int i = 0; i < brownMeteors.length ; i++) {
+			brownMeteors[i].setLayoutY(brownMeteors[i].getLayoutY() + 7);
+			brownMeteors[i].setRotate(brownMeteors[i].getRotate() + 4);
+		}
+		
+		for(int i = 0; i < greyMeteors.length ; i++) {
+			greyMeteors[i].setLayoutY(greyMeteors[i].getLayoutY() + 7);
+			greyMeteors[i].setRotate(greyMeteors[i].getRotate() + 4);
+		}
+	}
+	
+	private void checkIfElementsAreBehindTheCarsAndRelocate() {
+		for(int i = 0 ; i < brownMeteors.length ; i++) {
+			if(brownMeteors[i].getLayoutY() > 900) {
+				setNewElementPosition(brownMeteors[i]);
+			}
+		}
+		
+		for(int i = 0 ; i < greyMeteors.length ; i++) {
+			if(greyMeteors[i].getLayoutY() > 900) {
+				setNewElementPosition(greyMeteors[i]);
+			}
+		}
+	}
+	
+	private void setNewElementPosition(ImageView image) {
+		image.setLayoutX(randomPositionGenerator.nextInt(370));
+		image.setLayoutY(-(randomPositionGenerator.nextInt(3200) + 600));
 	}
 	
 	private void createCar(CAR choosenCar) {
@@ -97,6 +154,8 @@ public class GameViewManager {
 			@Override
 			public void handle(long now) {
 				moveBackground();
+				moveGameElements();
+				checkIfElementsAreBehindTheCarsAndRelocate();
 				moveCar();
 			}
 			
