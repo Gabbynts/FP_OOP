@@ -16,7 +16,7 @@ import javafx.scene.text.Font;
 
 public class InfoLabel extends Label {
 
-	public final static String FONT_PATH = "src/model/resources/konvector.ttf";
+	public final static String FONT_PATH = "src/model/resources/kenvector_future.ttf";
 	public final static String BACKGROUND_IMAGE = "view/resources/buttonBlue.png";
 	
 	public InfoLabel(String text) {

@@ -12,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import model.CAR;
+import model.SmallInfoLabel;
 
 public class GameViewManager {
 	
@@ -35,13 +36,25 @@ public class GameViewManager {
 	private final static String BACKGROUND_IMAGE = "view/resources/purple.png";
 	
 	private final static String METEOR_BROWN_IMAGE = "view/resources/meteorBrown.png";
-	private final static String METEOR_IMAGE = "view/resources/meteorBrown.png";
+	private final static String METEOR_IMAGE = "view/resources/cursor.png";
 	
 	private ImageView[] brownMeteors;
 	private ImageView[] greyMeteors;
 	Random randomPositionGenerator;
 	
+	private ImageView star;
+	private SmallInfoLabel pointsLabel;
+	private ImageView[] playerLifes;
+	private int playerLife;
+	private int points;
+	private final static String GOLD_STAR_IMAGE = "view/resources/carchooser/star_gold.png";
+	
+	private final static int STAR_RADIUS = 12;
+	private final static int CAR_RADIUS = 27;
+	private final static int METEOR_RADIUS = 20;
+	
 	public GameViewManager() {
+		randomPositionGenerator = new Random();
 		initializeStage();
 		createKeyListeners();
 	}
@@ -89,12 +102,29 @@ public class GameViewManager {
 		this.menuStage.hide();
 		createBackground();
 		createCar(choosenCar);
-		createGameElements();
+		createGameElements(choosenCar);
 		createGameLoop();
 		gameStage.show();
 	}
 	
-	private void createGameElements() {
+	private void createGameElements(CAR choosenCar) {
+		playerLife = 2;
+		star = new ImageView(GOLD_STAR_IMAGE);
+		setNewElementPosition(star);
+		gamePane.getChildren().add(star);
+		pointsLabel = new SmallInfoLabel("POINTS : 00");
+		pointsLabel.setLayoutX(460);
+		pointsLabel.setLayoutY(20);
+		gamePane.getChildren().add(pointsLabel);
+		playerLifes = new ImageView[3]; 
+		
+		for(int i = 0 ; i < playerLifes.length ; i++) {
+			playerLifes[i] = new ImageView(choosenCar.getUrlLife());
+			playerLifes[i].setLayoutX(455 + (i * 50));
+			playerLifes[i].setLayoutY(80);
+			gamePane.getChildren().add(playerLifes[i]);
+		}
+		
 		brownMeteors = new ImageView[3];
 		for(int i = 0 ; i < brownMeteors.length ; i++) {
 			brownMeteors[i] = new ImageView(METEOR_BROWN_IMAGE);
@@ -111,6 +141,8 @@ public class GameViewManager {
 	}
 	
 	private void moveGameElements() {
+		star.setLayoutY(star.getLayoutY() + 5);
+		
 		for(int i = 0; i < brownMeteors.length ; i++) {
 			brownMeteors[i].setLayoutY(brownMeteors[i].getLayoutY() + 7);
 			brownMeteors[i].setRotate(brownMeteors[i].getRotate() + 4);
@@ -123,6 +155,10 @@ public class GameViewManager {
 	}
 	
 	private void checkIfElementsAreBehindTheCarsAndRelocate() {
+		if(star.getLayoutY() > 1200) {
+			setNewElementPosition(star);
+		}
+		
 		for(int i = 0 ; i < brownMeteors.length ; i++) {
 			if(brownMeteors[i].getLayoutY() > 900) {
 				setNewElementPosition(brownMeteors[i]);
@@ -156,6 +192,7 @@ public class GameViewManager {
 				moveBackground();
 				moveGameElements();
 				checkIfElementsAreBehindTheCarsAndRelocate();
+				checkIfElementsCollide();
 				moveCar();
 			}
 			
@@ -235,5 +272,46 @@ public class GameViewManager {
 		if(gridPane2.getLayoutY() >= 1024) {
 			gridPane2.setLayoutY(-1024);
 		}
+	}
+	
+	private void checkIfElementsCollide() {
+		if(CAR_RADIUS + STAR_RADIUS > calculateDistance(car.getLayoutX() + 49, star.getLayoutX() + 15, car.getLayoutY() + 37, star.getLayoutY() + 15)) {
+			setNewElementPosition(star);
+			
+			points++;
+			String textToSet = "POINTS: ";
+			if(points < 10) {
+				textToSet = textToSet + "0";
+			}
+			pointsLabel.setText(textToSet + points);
+		}
+		
+		for(int i = 0 ; i < brownMeteors.length ; i++) {
+			if(METEOR_RADIUS + CAR_RADIUS > calculateDistance(car.getLayoutX() + 49, brownMeteors[i].getLayoutX() + 20, car.getLayoutY() + 37, brownMeteors[i].getLayoutY() + 20)) {
+				removeLife();
+				setNewElementPosition(brownMeteors[i]);
+			}
+		}
+		
+		for(int i = 0 ; i < greyMeteors.length ; i++) {
+			if(METEOR_RADIUS + CAR_RADIUS > calculateDistance(car.getLayoutX() + 49, greyMeteors[i].getLayoutX() + 20, car.getLayoutY() + 37, brownMeteors[i].getLayoutY() + 20)) {
+				removeLife();
+				setNewElementPosition(greyMeteors[i]);
+			}
+		}
+	}
+	
+	private void removeLife() {
+		gamePane.getChildren().remove(playerLifes[playerLife]);
+		playerLife--;
+		if(playerLife < 0) {
+			gameStage.close();
+			gameTimer.stop();
+			menuStage.show();
+		}
+	}
+	
+	private double calculateDistance(double x1, double x2, double y1, double y2) {
+		return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
 	}
 }
