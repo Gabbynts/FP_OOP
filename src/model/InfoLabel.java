@@ -17,7 +17,7 @@ import javafx.scene.text.Font;
 public class InfoLabel extends Label {
 
 	public final static String FONT_PATH = "src/model/resources/kenvector_future.ttf";
-	public final static String BACKGROUND_IMAGE = "view/resources/buttonBlue.png";
+	public final static String BACKGROUND_IMAGE = "model/resources/3.png";
 	
 	public InfoLabel(String text) {
 		setPrefWidth(380);
@@ -27,7 +27,7 @@ public class InfoLabel extends Label {
 		setLabelFont();
 		setAlignment(Pos.CENTER);
 		
-		BackgroundImage backgroundImage = new BackgroundImage(new Image(BACKGROUND_IMAGE, 380, 49, false, true), 
+		BackgroundImage backgroundImage = new BackgroundImage(new Image(BACKGROUND_IMAGE, 380, 220, false, true), 
 				BackgroundRepeat.NO_REPEAT , BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, null);
 		
 		setBackground(new Background(backgroundImage));

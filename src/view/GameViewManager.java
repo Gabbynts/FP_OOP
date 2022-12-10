@@ -95,6 +95,7 @@ public class GameViewManager {
 		gameScene = new Scene(gamePane, GAME_WIDTH, GAME_HEIGHT);
 		gameStage = new Stage();
 		gameStage.setScene(gameScene);
+		gameStage.setResizable(false);
 	}
 	
 	public void createNewGame(Stage menuStage, CAR choosenCar) {
@@ -111,11 +112,13 @@ public class GameViewManager {
 		playerLife = 2;
 		star = new ImageView(GOLD_STAR_IMAGE);
 		setNewElementPosition(star);
+		
 		gamePane.getChildren().add(star);
 		pointsLabel = new SmallInfoLabel("POINTS : 00");
 		pointsLabel.setLayoutX(460);
 		pointsLabel.setLayoutY(20);
 		gamePane.getChildren().add(pointsLabel);
+		
 		playerLifes = new ImageView[3]; 
 		
 		for(int i = 0 ; i < playerLifes.length ; i++) {
@@ -145,17 +148,15 @@ public class GameViewManager {
 		
 		for(int i = 0; i < brownMeteors.length ; i++) {
 			brownMeteors[i].setLayoutY(brownMeteors[i].getLayoutY() + 7);
-			brownMeteors[i].setRotate(brownMeteors[i].getRotate() + 4);
 		}
 		
 		for(int i = 0; i < greyMeteors.length ; i++) {
 			greyMeteors[i].setLayoutY(greyMeteors[i].getLayoutY() + 7);
-			greyMeteors[i].setRotate(greyMeteors[i].getRotate() + 4);
 		}
 	}
 	
 	private void checkIfElementsAreBehindTheCarsAndRelocate() {
-		if(star.getLayoutY() > 1200) {
+		if(star.getLayoutY() > GAME_HEIGHT) {
 			setNewElementPosition(star);
 		}
 		
@@ -180,7 +181,7 @@ public class GameViewManager {
 	private void createCar(CAR choosenCar) {
 		car = new ImageView(choosenCar.getUrl());
 		car.setLayoutX(GAME_WIDTH/2);
-		car.setY(GAME_HEIGHT - 90);
+		car.setY(GAME_HEIGHT - 150);
 		gamePane.getChildren().add(car);
 	}
 	
@@ -262,8 +263,8 @@ public class GameViewManager {
 	}
 	
 	private void moveBackground() {
-		gridPane1.setLayoutY(gridPane1.getLayoutY() + 0.5);
-		gridPane2.setLayoutY(gridPane2.getLayoutY() + 0.5);
+		gridPane1.setLayoutY(gridPane1.getLayoutY() + 5);
+		gridPane2.setLayoutY(gridPane2.getLayoutY() + 5);
 		
 		if(gridPane1.getLayoutY() >= 1024) {
 			gridPane1.setLayoutY(-1024);
@@ -281,13 +282,13 @@ public class GameViewManager {
 			points++;
 			String textToSet = "POINTS: ";
 			if(points < 10) {
-				textToSet = textToSet + "0";
+				textToSet += "0";
 			}
 			pointsLabel.setText(textToSet + points);
 		}
 		
 		for(int i = 0 ; i < brownMeteors.length ; i++) {
-			if(METEOR_RADIUS + CAR_RADIUS > calculateDistance(car.getLayoutX() + 49, brownMeteors[i].getLayoutX() + 20, car.getLayoutY() + 37, brownMeteors[i].getLayoutY() + 20)) {
+			if(METEOR_RADIUS + CAR_RADIUS > calculateDistance(car.getLayoutX() + 49, car.getLayoutY() + 37, brownMeteors[i].getLayoutX() + 20, brownMeteors[i].getLayoutY() + 20)) {
 				removeLife();
 				setNewElementPosition(brownMeteors[i]);
 			}
