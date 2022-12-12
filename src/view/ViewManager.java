@@ -1,5 +1,8 @@
 package view;
 
+import java.io.File;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +22,9 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.HBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.CAR;
@@ -26,6 +32,7 @@ import model.CarPicker;
 import model.CrashDodgerButton;
 import model.CrashDodgerSubScene;
 import model.InfoLabel;
+import model.CrashDodgerSounds;
 
 public class ViewManager {
 	
@@ -37,6 +44,8 @@ public class ViewManager {
 	
 	private final static int MENU_BUTTONS_START_X = 100;
 	private final static int MENU_BUTTONS_START_Y = 150;
+	
+	private final static String CLICK_BUTTON = "file:src/model/resources/sounds/water-sci-fi.mp3";
 	
 	private CrashDodgerSubScene credistsSubScene;
 	private CrashDodgerSubScene helpSubScene;
@@ -59,10 +68,24 @@ public class ViewManager {
 		mainStage = new Stage();
 		mainStage.setScene(mainScene);
 		
+		backgroundSound();
 		createSubScenes();
 		createButtons();
 		createBackground();
 		createLogo();
+	}
+	
+	private void backgroundSound() {
+		String path = "src/model/resources/sounds/neon-gaming.mp3";
+		Media media = new Media(new File(path).toURI().toString());
+		MediaPlayer mediaPlayer = new MediaPlayer(media);
+		
+		//CASTING
+		String vol ="0.5";
+		double vol2 = Double.parseDouble(vol);
+		
+		mediaPlayer.setVolume(vol2);
+		mediaPlayer.setAutoPlay(true);
 	}
 	
 	private void showSubScene(CrashDodgerSubScene subScene) {
@@ -143,6 +166,13 @@ public class ViewManager {
 
 				@Override
 				public void handle(MouseEvent event) {
+					try {
+						CrashDodgerSounds.playSound(new URI(CLICK_BUTTON));
+					} 
+					catch(URISyntaxException e) {
+						e.printStackTrace();
+					}
+					
 					for(CarPicker car : carsList) {
 						car.setIsCircleChoosen(false);
 					}
@@ -151,12 +181,15 @@ public class ViewManager {
 				}
 			});
 		}
+		
 		box.setLayoutX(300 - (75*2));
 		box.setLayoutY(290);
 		return box;
 	}
 	
 	private CrashDodgerButton createButtonToStart() {
+		boolean checkButtonToStart = false;
+		
 		CrashDodgerButton startButton = new CrashDodgerButton("START");
 		startButton.setLayoutX(340);
 		startButton.setLayoutY(488);
@@ -165,12 +198,20 @@ public class ViewManager {
 
 			@Override
 			public void handle(ActionEvent arg0) {
+				//EXCEPTION HANDLING
+				try {
+					CrashDodgerSounds.playSound(new URI(CLICK_BUTTON));
+				} 
+				catch(URISyntaxException e) {
+					e.printStackTrace();
+				}
+				
 				if(choosenCar != null) {
+					checkButtonToStart = true;
 					GameViewManager gameViewManager = new GameViewManager();
 					gameViewManager.createNewGame(mainStage, choosenCar);
 				}
 			}
-			
 		});
 		
 		return startButton;
@@ -203,6 +244,12 @@ public class ViewManager {
 
 			@Override
 			public void handle(ActionEvent event) {
+				try {
+					CrashDodgerSounds.playSound(new URI(CLICK_BUTTON));
+				} 
+				catch(URISyntaxException e) {
+					e.printStackTrace();
+				}
 				showSubScene(carChooserScene);
 				//carChooserScene.moveSubScene();
 			}
@@ -218,6 +265,12 @@ public class ViewManager {
 
 			@Override
 			public void handle(ActionEvent event) {
+				try {
+					CrashDodgerSounds.playSound(new URI(CLICK_BUTTON));
+				} 
+				catch(URISyntaxException e) {
+					e.printStackTrace();
+				}
 				showSubScene(scoreSubScene);
 			}
 			
@@ -232,6 +285,12 @@ public class ViewManager {
 			
 			@Override
 			public void handle(ActionEvent event) {
+				try {
+					CrashDodgerSounds.playSound(new URI(CLICK_BUTTON));
+				} 
+				catch(URISyntaxException e) {
+					e.printStackTrace();
+				}
 				showSubScene(helpSubScene);
 			}
 		});
@@ -245,6 +304,12 @@ public class ViewManager {
 			
 			@Override
 			public void handle(ActionEvent event) {
+				try {
+					CrashDodgerSounds.playSound(new URI(CLICK_BUTTON));
+				} 
+				catch(URISyntaxException e) {
+					e.printStackTrace();
+				}
 				showSubScene(credistsSubScene);
 			}
 		});
@@ -258,6 +323,12 @@ public class ViewManager {
 
 			@Override
 			public void handle(ActionEvent arg0) {
+				try {
+					CrashDodgerSounds.playSound(new URI(CLICK_BUTTON));
+				} 
+				catch(URISyntaxException e) {
+					e.printStackTrace();
+				}
 				mainStage.close();
 			}
 			

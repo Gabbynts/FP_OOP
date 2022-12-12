@@ -210,9 +210,7 @@ public class GameViewManager {
 				checkIfElementsCollide();
 				moveCar();
 			}
-			
 		};
-		
 		gameTimer.start();
 	}
 	
