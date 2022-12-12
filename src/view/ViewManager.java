@@ -19,6 +19,7 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import model.CAR;
 import model.CarPicker;
@@ -85,15 +86,28 @@ public class ViewManager {
 		mainPane.getChildren().add(scoreSubScene);
 		
 		createCarChooserSubScene();
+		createHelpSubScene();
+	}
+	
+	private void createHelpSubScene() {
+		helpSubScene = new CrashDodgerSubScene();
+		mainPane.getChildren().add(helpSubScene);
+		
+		InfoLabel helpLabel = new InfoLabel("Information");
+		helpLabel.setLayoutX(130);
+		helpLabel.setLayoutY(210);
+		
+		helpSubScene.getPane().getChildren().add(helpLabel);
 	}
 	
 	private void createCarChooserSubScene() {
 		carChooserScene = new CrashDodgerSubScene();
 		mainPane.getChildren().add(carChooserScene);
 		
-		InfoLabel chooseCarLabel = new InfoLabel("CHOOSE YOUR CAR");
+		InfoLabel chooseCarLabel = new InfoLabel("LETS DRIVE");
 		chooseCarLabel.setLayoutX(130);
 		chooseCarLabel.setLayoutY(210);
+		
 		carChooserScene.getPane().getChildren().add(chooseCarLabel);
 		carChooserScene.getPane().getChildren().add(createCarsToChoose());
 		carChooserScene.getPane().getChildren().add(createButtonToStart());
@@ -107,6 +121,24 @@ public class ViewManager {
 			CarPicker carToPick = new CarPicker(car);
 			carsList.add(carToPick);
 			box.getChildren().add(carToPick);
+			
+			carToPick.setOnMouseEntered(new EventHandler<MouseEvent>() {
+				
+				@Override
+				public void handle(MouseEvent event) {
+					carToPick.setEffect(new DropShadow(20, Color.YELLOW));
+				}
+				
+			});
+			
+			carToPick.setOnMouseExited(new EventHandler<MouseEvent>() {
+				
+				@Override
+				public void handle(MouseEvent event) {
+					carToPick.setEffect(null);
+				}
+				
+			});
 			carToPick.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
 				@Override

@@ -14,7 +14,7 @@ import javafx.util.Duration;
 public class CrashDodgerSubScene extends SubScene {
 	
 	private final static String FONT_PATH = "src/model/resources/konvector_future.ttf";
-	private final static String BACKGROUND_IMAGE = "model/resources/information.png";
+	private final static String BACKGROUND_IMAGE = "model/resources/Information.png";
 	
 	private boolean isHidden;
 	

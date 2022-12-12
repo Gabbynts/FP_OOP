@@ -5,13 +5,19 @@ import java.util.Random;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import model.CAR;
+import model.RoadSeparator;
 import model.SmallInfoLabel;
 
 public class GameViewManager {
@@ -33,7 +39,7 @@ public class GameViewManager {
 	
 	private GridPane gridPane1;
 	private GridPane gridPane2;
-	private final static String BACKGROUND_IMAGE = "view/resources/purple.png";
+	private final static String BACKGROUND_IMAGE = "view/resources/street.png";
 	
 	private final static String METEOR_BROWN_IMAGE = "view/resources/meteorBrown.png";
 	private final static String METEOR_IMAGE = "view/resources/cursor.png";
@@ -102,11 +108,20 @@ public class GameViewManager {
 		this.menuStage = menuStage;
 		this.menuStage.hide();
 		createBackground();
+		createRoadSeparator();
 		createCar(choosenCar);
 		createGameElements(choosenCar);
 		createGameLoop();
 		gameStage.show();
 	}
+	
+	private void createRoadSeparator() {
+		RoadSeparator roadSeparator = new RoadSeparator();
+		roadSeparator.setTranslateY(150);
+		roadSeparator.setTranslateX(150);
+		gamePane.getChildren().add(roadSeparator);
+	}
+	
 	
 	private void createGameElements(CAR choosenCar) {
 		playerLife = 2;
@@ -190,7 +205,6 @@ public class GameViewManager {
 
 			@Override
 			public void handle(long now) {
-				moveBackground();
 				moveGameElements();
 				checkIfElementsAreBehindTheCarsAndRelocate();
 				checkIfElementsCollide();
@@ -245,34 +259,9 @@ public class GameViewManager {
 	}
 	
 	private void createBackground() {
-		gridPane1 = new GridPane();
-		gridPane2 = new GridPane();
-		
-		for(int i = 0 ; i < 12 ; i++) {
-			ImageView backgroundImage1 = new ImageView(BACKGROUND_IMAGE);
-			ImageView backgroundImage2 = new ImageView(BACKGROUND_IMAGE);
-			GridPane.setConstraints(backgroundImage1, i % 3, i / 3);
-			GridPane.setConstraints(backgroundImage2, i % 3, i / 3);
-			gridPane1.getChildren().add(backgroundImage1);
-			gridPane2.getChildren().add(backgroundImage2);
-		}
-		
-		gridPane1.setLayoutY(-1024);
-		
-		gamePane.getChildren().addAll(gridPane1, gridPane2);
-	}
-	
-	private void moveBackground() {
-		gridPane1.setLayoutY(gridPane1.getLayoutY() + 5);
-		gridPane2.setLayoutY(gridPane2.getLayoutY() + 5);
-		
-		if(gridPane1.getLayoutY() >= 1024) {
-			gridPane1.setLayoutY(-1024);
-		}
-		
-		if(gridPane2.getLayoutY() >= 1024) {
-			gridPane2.setLayoutY(-1024);
-		}
+		Image backgroundImage = new Image("view/resources/street.png", 600, 800, false, true);
+		BackgroundImage background = new BackgroundImage(backgroundImage, BackgroundRepeat.REPEAT , BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, null);
+		gamePane.setBackground(new Background(background));
 	}
 	
 	private void checkIfElementsCollide() {

@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 public class CrashDodgerButton extends Button {
@@ -67,7 +68,7 @@ public class CrashDodgerButton extends Button {
 		setOnMouseEntered(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				setEffect(new DropShadow());
+				setEffect(new DropShadow(50, Color.YELLOW));
 			}
 		});
 		
