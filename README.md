@@ -201,29 +201,7 @@ public RoadSeparator() {
 }
 ```
 12. Abstract Class <br>
-src -> model -> Elements.java
-```
-public abstract class Elements {
-	private Color color;
-	protected double x;
-	protected double y;
-	
-	public void Shape() {
-		color = Color.WHITE;
-	}
-	
-	public abstract void down();
-	
-	public void move() {
-		x += 2.00;
-		y += 2.00;
-	}
-	
-	public void setColor(Color color) {
-		this.color = color;
-	}
-}
-```
+
 13. Generics <br>
 ```
 file
