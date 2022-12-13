@@ -1,6 +1,6 @@
 package model;
 
-public class Stone extends Elements{
+public abstract class Stone extends Elements{
 	
 	protected double height;
 	protected double width;

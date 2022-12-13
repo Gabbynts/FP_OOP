@@ -113,6 +113,13 @@ public class GameViewManager {
 		gameStage = new Stage();
 		gameStage.setScene(gameScene);
 		gameStage.setResizable(false);
+		gameStage.setOnCloseRequest(x -> {
+			x.consume();
+			if(ExitGame.exitGame()) {
+				gameStage.close();
+			menuStage.show();	
+			}
+		});
 	}
 	
 	public void createNewGame(Stage menuStage, CAR choosenCar) {

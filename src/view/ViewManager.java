@@ -315,6 +315,12 @@ public class ViewManager {
 		CrashDodgerButton creditsButton = new CrashDodgerButton("CREDITS");
 		addMenuButton(creditsButton);
 		
+		InfoLabel creditsLabel = new InfoLabel("CREDIT");
+		creditsLabel.setLayoutX(130);
+		creditsLabel.setLayoutY(210);
+		
+		credistsSubScene.getPane().getChildren().add(creditsLabel);
+		
 		creditsButton.setOnAction(new EventHandler<ActionEvent>() {
 			
 			@Override
