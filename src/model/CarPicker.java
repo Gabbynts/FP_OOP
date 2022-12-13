@@ -10,8 +10,8 @@ public class CarPicker extends VBox {
 	private ImageView circleImage;
 	private ImageView carImage;
 	
-	private String circleNotChoosen = "view/resources/carchooser/grey_circle.png";
-	private String circleChoosen = "view/resources/carchooser/circle_choosen.png";
+	private String circleNotChoosen = "view/resources/carchooser/picker_2.png";
+	private String circleChoosen = "view/resources/carchooser/picker.png";
 	
 	private CAR car;
 	

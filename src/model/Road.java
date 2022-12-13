@@ -18,8 +18,8 @@ public class Road extends Rectangle{
 		setFill(Color.WHITE);
 		
 		initialPos = y;
-		destinationPos = 1500 - initialPos;
-		restartPos = -1*(100 + initialPos);
+		destinationPos = 400 - initialPos;
+		restartPos = -1*(50 + initialPos);
 	}
 	
 }

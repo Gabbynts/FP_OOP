@@ -59,6 +59,8 @@ public class ViewManager {
 	List<CarPicker> carsList;
 	private CAR choosenCar;
 	
+	private boolean isCheckButtonToStart;
+	
 	
 	public ViewManager() {
 		//Constructor
@@ -68,11 +70,11 @@ public class ViewManager {
 		mainStage = new Stage();
 		mainStage.setScene(mainScene);
 		
-		backgroundSound();
 		createSubScenes();
 		createButtons();
 		createBackground();
 		createLogo();
+		backgroundSound();
 	}
 	
 	private void backgroundSound() {
@@ -81,7 +83,7 @@ public class ViewManager {
 		MediaPlayer mediaPlayer = new MediaPlayer(media);
 		
 		//CASTING
-		String vol ="0.5";
+		String vol ="0.3";
 		double vol2 = Double.parseDouble(vol);
 		
 		mediaPlayer.setVolume(vol2);
@@ -188,8 +190,6 @@ public class ViewManager {
 	}
 	
 	private CrashDodgerButton createButtonToStart() {
-		boolean checkButtonToStart = false;
-		
 		CrashDodgerButton startButton = new CrashDodgerButton("START");
 		startButton.setLayoutX(340);
 		startButton.setLayoutY(488);
@@ -207,15 +207,24 @@ public class ViewManager {
 				}
 				
 				if(choosenCar != null) {
-					checkButtonToStart = true;
+					//isCheckButtonToStart = true;
 					GameViewManager gameViewManager = new GameViewManager();
 					gameViewManager.createNewGame(mainStage, choosenCar);
 				}
+				
 			}
 		});
-		
 		return startButton;
 	}
+	
+//	public boolean isCheckButtonToStart() {
+//		return isCheckButtonToStart;
+//	}
+//	
+//	public void setIsCheckButtonToStart(boolean isCheckButtonToStart) {
+//		this.isCheckButtonToStart = isCheckButtonToStart;
+//		isCheckButtonToStart = false;
+//	}
 
 	public Stage getMainStage() {
 		return mainStage;

@@ -14,7 +14,6 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import model.CAR;
 import model.RoadSeparator;
@@ -37,12 +36,10 @@ public class GameViewManager {
 	private int angle;
 	private AnimationTimer gameTimer;
 	
-	private GridPane gridPane1;
-	private GridPane gridPane2;
 	private final static String BACKGROUND_IMAGE = "view/resources/street.png";
 	
-	private final static String METEOR_BROWN_IMAGE = "view/resources/meteorBrown.png";
-	private final static String METEOR_IMAGE = "view/resources/cursor.png";
+	private final static String METEOR_BROWN_IMAGE = "view/resources/carchooser/red_1.png";
+	private final static String METEOR_IMAGE = "view/resources/carchooser/yellow_1.png";
 	
 	private ImageView[] brownMeteors;
 	private ImageView[] greyMeteors;
@@ -57,7 +54,7 @@ public class GameViewManager {
 	
 	private final static int STAR_RADIUS = 12;
 	private final static int CAR_RADIUS = 27;
-	private final static int METEOR_RADIUS = 20;
+	private final static int METEOR_RADIUS = 40;
 	
 	public GameViewManager() {
 		randomPositionGenerator = new Random();
@@ -116,10 +113,15 @@ public class GameViewManager {
 	}
 	
 	private void createRoadSeparator() {
-		RoadSeparator roadSeparator = new RoadSeparator();
-		roadSeparator.setTranslateY(150);
-		roadSeparator.setTranslateX(150);
-		gamePane.getChildren().add(roadSeparator);
+		RoadSeparator roadSeparator1 = new RoadSeparator();
+		RoadSeparator roadSeparator2 = new RoadSeparator();
+		RoadSeparator roadSeparator3 = new RoadSeparator();
+		
+		roadSeparator1.setTranslateY(5);
+		roadSeparator1.setTranslateX(200);
+		roadSeparator2.setTranslateY(0);
+		roadSeparator2.setTranslateX(400);
+		gamePane.getChildren().addAll(roadSeparator1, roadSeparator2);
 	}
 	
 	
@@ -162,11 +164,11 @@ public class GameViewManager {
 		star.setLayoutY(star.getLayoutY() + 5);
 		
 		for(int i = 0; i < brownMeteors.length ; i++) {
-			brownMeteors[i].setLayoutY(brownMeteors[i].getLayoutY() + 7);
+			brownMeteors[i].setLayoutY(brownMeteors[i].getLayoutY() + 10);
 		}
 		
 		for(int i = 0; i < greyMeteors.length ; i++) {
-			greyMeteors[i].setLayoutY(greyMeteors[i].getLayoutY() + 7);
+			greyMeteors[i].setLayoutY(greyMeteors[i].getLayoutY() + 10);
 		}
 	}
 	
@@ -176,20 +178,20 @@ public class GameViewManager {
 		}
 		
 		for(int i = 0 ; i < brownMeteors.length ; i++) {
-			if(brownMeteors[i].getLayoutY() > 900) {
+			if(brownMeteors[i].getLayoutY() > GAME_HEIGHT) {
 				setNewElementPosition(brownMeteors[i]);
 			}
 		}
 		
 		for(int i = 0 ; i < greyMeteors.length ; i++) {
-			if(greyMeteors[i].getLayoutY() > 900) {
+			if(greyMeteors[i].getLayoutY() > GAME_HEIGHT) {
 				setNewElementPosition(greyMeteors[i]);
 			}
 		}
 	}
 	
 	private void setNewElementPosition(ImageView image) {
-		image.setLayoutX(randomPositionGenerator.nextInt(370));
+		image.setLayoutX(randomPositionGenerator.nextInt(400));
 		image.setLayoutY(-(randomPositionGenerator.nextInt(3200) + 600));
 	}
 	

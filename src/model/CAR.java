@@ -2,10 +2,10 @@ package model;
 
 public enum CAR {
 	
-	RED("view/resources/carchooser/car_red.png", "view/resources/carchooser/heart.png"),
-	YELLOW("view/resources/carchooser/car_yellow.png", "view/resources/carchooser/heart.png"),
-	BLACK("view/resources/carchooser/car_black.png", "view/resources/carchooser/heart.png"),
-	BLUE("view/resources/carchooser/car_blue.png", "view/resources/carchooser/heart.png");
+	RED("view/resources/carchooser/red.png", "view/resources/carchooser/heart.png"),
+	YELLOW("view/resources/carchooser/yellow.png", "view/resources/carchooser/heart.png"),
+	BLACK("view/resources/carchooser/black.png", "view/resources/carchooser/heart.png"),
+	BLUE("view/resources/carchooser/blue.png", "view/resources/carchooser/heart.png");
 	
 	private String urlCar;
 	private String urlLife;

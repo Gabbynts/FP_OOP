@@ -22,7 +22,7 @@ public class RoadSeparator extends Pane {
 	public RoadSeparator() {
 		list = getChildren();
 		setRoadSeparator();
-		Rectangle clip = new Rectangle(0, -100, 15, 500);
+		Rectangle clip = new Rectangle(0, 10, 40, 1110);
 		setClip(clip);
 		moveRoadSeperator();
 	}
@@ -31,9 +31,9 @@ public class RoadSeparator extends Pane {
 		Road roadSeparator;
 		roadList = new ArrayList<>();
 		
-		for(int i = 0 ; i < 9 ; i++) {
+		for(int i = 0 ; i < 16 ; i++) {
 			if(i % 2 == 0) {
-				roadSeparator = new Road(0, i * 40, 6, 40);
+				roadSeparator = new Road(0, i * 60, 10, 70);
 				roadList.add(roadSeparator);
 				list.add(roadSeparator);
 			}
@@ -47,7 +47,7 @@ public class RoadSeparator extends Pane {
 				list.get(i).setTranslateY(list.get(i).getTranslateY() + 1);
 			}
 			
-			if(list.get(dist).getTranslateY() > 400) {
+			if(list.get(dist).getTranslateY() > 900) {
 				list.get(dist).setTranslateY(-50);
 				dist -= 1;
 				if(dist < 0) {
