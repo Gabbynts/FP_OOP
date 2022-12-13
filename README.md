@@ -187,7 +187,7 @@ catch(URISyntaxException e) {
 ```
 10. GUI <br>
 
-![image](img/GUI-image.jpg)
+![image](https://github.com/Gabbynts/FP_OOP/blob/main/img/GUI-img.jpg)
 
 11. Interface <br>
 src -> model -> RoadSeparator.java
