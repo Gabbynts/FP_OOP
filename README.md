@@ -20,13 +20,11 @@ Pada awal permainan pemain akan memiliki 3 nyawa untuk bermain, saat pemain mena
 ### **Aspek OOP**
 Project ini diprogram dengan menerapkan aspek OOP, yaitu sebagai berikut:<br>
 1. Casting/ Conversion <br>
-src -> view -> ViewManager.java
 ```
 String vol ="0.3";
 double vol2 = Double.parseDouble(vol);
 ```
 2. Constructor <br>
-src -> model -> RoadSeparator.java
 ```
 public class RoadSeparator extends Pane {
 	
@@ -81,12 +79,10 @@ public class RoadSeparator extends Pane {
 
 ```
 3. Overloading <br>
-src -> 
 ```
 extends
 ```
 4. Overriding <br>
-src -> view -> ViewManager.java
 ```
 exitButton.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -104,7 +100,6 @@ exitButton.setOnAction(new EventHandler<ActionEvent>() {
 		});
 ```
 5. Encapsulation <br>
-src -> 
 ```
 public boolean getCheckButtonToStart() {
     return isCheckButtonToStart;
@@ -115,7 +110,6 @@ public void setCheckButtonToStart(boolean isCheckButtonToStart) {
 }
 ```
 6. Inheritance <br>
-src -> 
 ```
 public class CrashDodgerSubScene extends SubScene {
 	
@@ -167,18 +161,15 @@ public class CrashDodgerSubScene extends SubScene {
 }
 ```
 7. Polymorphism <br>
-src -> 
 ```
 file
 ```
 8. ArrayList <br>
-src -> 
 ```
 Road roadSeparator;
 roadList = new ArrayList<>();
 ```
 9. Exception Handling <br>
-src -> 
 ```
 try {
 	CrashDodgerSounds.playSound(new URI(CLICK_BUTTON));
@@ -192,7 +183,6 @@ catch(URISyntaxException e) {
 ![image](img/GUI-image.jpg)
 ```
 11. Interface <br>
-src -> 
 ```
 public RoadSeparator() {
 	list = getChildren();
@@ -203,17 +193,14 @@ public RoadSeparator() {
 }
 ```
 12. Abstract Class <br>
-src -> 
 ```
 file
 ```
 13. Generics <br>
-src -> 
 ```
 file
 ```
 14. Collection <br>
-src -> 
 ```
 Road roadSeparator;
 roadList = new ArrayList<>();
@@ -227,7 +214,17 @@ list.add(roadSeparator);
 }
 ```
 15. Input Output <br>
-src -> 
 ```
-file
+public class ExitGame {
+	public static boolean exitGame() {
+		
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setHeaderText(null);
+		alert.setContentText("Quit the Game?");
+		if (alert.showAndWait() != Optional.of(ButtonType.CANCEL)) {
+			return false;
+		} 
+		return true;
+	}
+}
 ```
