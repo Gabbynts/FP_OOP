@@ -46,6 +46,7 @@ public class ViewManager {
 	private final static int MENU_BUTTONS_START_Y = 150;
 	
 	private final static String CLICK_BUTTON = "file:src/model/resources/sounds/water-sci-fi.mp3";
+	//private final static String CLICK_START_BUTTON = "file:src/model/resources/sounds/start-game.mp3";
 	
 	private CrashDodgerSubScene credistsSubScene;
 	private CrashDodgerSubScene helpSubScene;
@@ -217,14 +218,13 @@ public class ViewManager {
 		return startButton;
 	}
 	
-//	public boolean isCheckButtonToStart() {
-//		return isCheckButtonToStart;
-//	}
-//	
-//	public void setIsCheckButtonToStart(boolean isCheckButtonToStart) {
-//		this.isCheckButtonToStart = isCheckButtonToStart;
-//		isCheckButtonToStart = false;
-//	}
+	public boolean getCheckButtonToStart() {
+		return isCheckButtonToStart;
+	}
+	
+	public void setCheckButtonToStart(boolean isCheckButtonToStart) {
+		this.isCheckButtonToStart = isCheckButtonToStart;
+	}
 
 	public Stage getMainStage() {
 		return mainStage;
@@ -269,6 +269,12 @@ public class ViewManager {
 	private void createScoresButton() {
 		CrashDodgerButton scoresButton = new CrashDodgerButton("SCORES");
 		addMenuButton(scoresButton);
+		
+		InfoLabel scoresLabel = new InfoLabel("SCORES");
+		scoresLabel.setLayoutX(130);
+		scoresLabel.setLayoutY(210);
+		
+		scoreSubScene.getPane().getChildren().add(scoresLabel);
 		
 		scoresButton.setOnAction(new EventHandler<ActionEvent>() {
 

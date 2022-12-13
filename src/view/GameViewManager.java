@@ -1,5 +1,6 @@
 package view;
 
+import java.io.File;
 import java.util.Random;
 
 import javafx.animation.AnimationTimer;
@@ -14,6 +15,8 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import model.CAR;
 import model.RoadSeparator;
@@ -58,9 +61,20 @@ public class GameViewManager {
 	
 	public GameViewManager() {
 		randomPositionGenerator = new Random();
+		
 		initializeStage();
 		createKeyListeners();
+		//backgroundSound();
 	}
+	
+//	private void backgroundSound() {
+//		String path = "src/model/resources/sounds/atv-engine-motor.mp3";
+//		Media media = new Media(new File(path).toURI().toString());
+//		MediaPlayer mediaPlayer = new MediaPlayer(media);
+//		
+//		mediaPlayer.setVolume(0.9);
+//		mediaPlayer.setAutoPlay(true);
+//	}
 
 	private void createKeyListeners() {
 		gameScene.setOnKeyPressed(new EventHandler <KeyEvent>() {
