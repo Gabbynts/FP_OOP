@@ -20,11 +20,13 @@ Pada awal permainan pemain akan memiliki 3 nyawa untuk bermain, saat pemain mena
 ### **Aspek OOP**
 Project ini diprogram dengan menerapkan aspek OOP, yaitu sebagai berikut:<br>
 1. Casting/ Conversion <br>
+src -> view -> ViewManager.java
 ```
 String vol ="0.3";
 double vol2 = Double.parseDouble(vol);
 ```
 2. Constructor <br>
+src -> model -> RoadSeparator.java
 ```
 public class RoadSeparator extends Pane {
 	
@@ -83,6 +85,7 @@ public class RoadSeparator extends Pane {
 extends
 ```
 4. Overriding <br>
+src -> view -> ViewManager.java
 ```
 exitButton.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -100,6 +103,7 @@ exitButton.setOnAction(new EventHandler<ActionEvent>() {
 		});
 ```
 5. Encapsulation <br>
+src -> view -> ViewManager.java
 ```
 public boolean getCheckButtonToStart() {
     return isCheckButtonToStart;
@@ -110,6 +114,7 @@ public void setCheckButtonToStart(boolean isCheckButtonToStart) {
 }
 ```
 6. Inheritance <br>
+src -> Model -> CrashDodgerSubScene.java
 ```
 public class CrashDodgerSubScene extends SubScene {
 	
@@ -165,11 +170,13 @@ public class CrashDodgerSubScene extends SubScene {
 file
 ```
 8. ArrayList <br>
+src -> model -> RoadSeparator.java
 ```
 Road roadSeparator;
 roadList = new ArrayList<>();
 ```
 9. Exception Handling <br>
+src -> view -> ViewManager.java
 ```
 try {
 	CrashDodgerSounds.playSound(new URI(CLICK_BUTTON));
@@ -179,10 +186,11 @@ catch(URISyntaxException e) {
 }
 ```
 10. GUI <br>
-```
+
 ![image](img/GUI-image.jpg)
-```
+
 11. Interface <br>
+src -> model -> RoadSeparator.java
 ```
 public RoadSeparator() {
 	list = getChildren();
@@ -193,6 +201,7 @@ public RoadSeparator() {
 }
 ```
 12. Abstract Class <br>
+src -> model -> Elements.java
 ```
 public abstract class Elements {
 	private Color color;
@@ -220,6 +229,7 @@ public abstract class Elements {
 file
 ```
 14. Collection <br>
+src -> model -> RoadSeparator.java
 ```
 Road roadSeparator;
 roadList = new ArrayList<>();
@@ -233,6 +243,7 @@ list.add(roadSeparator);
 }
 ```
 15. Input Output <br>
+src -> view -> ExitGame.java
 ```
 public class ExitGame {
 	public static boolean exitGame() {
@@ -247,4 +258,6 @@ public class ExitGame {
 	}
 }
 ```
-### link referensi https://www.youtube.com/watch?v=DkIuA5ZEZ_U&list=PL4wcbt63yAbdtY-GOeuRjIePfUsukSJZ9
+link referensi https://www.youtube.com/watch?v=DkIuA5ZEZ_U&list=PL4wcbt63yAbdtY-GOeuRjIePfUsukSJZ9
+
+link demo 
