@@ -17,5 +17,4 @@ public class ExitGame {
 		} 
 		return true;
 	}
-	
 }
